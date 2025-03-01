@@ -84,6 +84,12 @@
 			<version>2.8.5</version>
 		</dependency>
 
+		<!-- Flyway para versionamento e migração do banco de dados -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+
 		<!-- Dependências para testes -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
