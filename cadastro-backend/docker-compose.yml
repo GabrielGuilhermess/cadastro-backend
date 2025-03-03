@@ -1,7 +1,6 @@
 version: "3.8"
 
 services:
-  # Serviço do banco de dados PostgreSQL
   postgres:
     image: postgres:latest
     container_name: postgres_cadastro
@@ -20,7 +19,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Serviço para rodar as migrações do Flyway
   flyway:
     image: flyway/flyway:latest
     container_name: flyway_migrations
@@ -36,7 +34,6 @@ services:
       - -connectRetries=10
       - migrate
 
-  # Serviço da aplicação (Back-end Spring Boot)
   app:
     build: .
     container_name: cadastro_backend
@@ -51,7 +48,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cadastrodb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: senha123
-      SPRING_FLYWAY_ENABLED: "false" # Flyway será gerenciado pelo serviço flyway
+      SPRING_FLYWAY_ENABLED: "false"
     volumes:
       - ./wait-for-it.sh:/app/wait-for-it.sh
     entrypoint: ["/app/wait-for-it.sh", "postgres:5432", "--", "java", "-jar", "app.jar"]

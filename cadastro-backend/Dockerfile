@@ -15,4 +15,4 @@ RUN apk add --no-cache bash
 WORKDIR /app
 # Copia o JAR gerado na etapa de build e renomeia para app.jar
 COPY --from=build /app/target/cadastro-backend-0.0.1-SNAPSHOT.jar app.jar
-# A imagem final não define ENTRYPOINT pois vamos usar o wait-for-it via docker-compose
+# Não define ENTRYPOINT pois usaremos o wait-for-it via docker-compose
