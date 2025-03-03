@@ -45,9 +45,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Tag and push Docker image to GitHub Container Registry
+      - name: Tag and push Docker image to GHCR
         run: |
-          LOWER_USERNAME=$(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')
-          docker tag cadastro-backend:latest ghcr.io/${LOWER_USERNAME}/cadastro-backend:latest
-          docker push ghcr.io/${LOWER_USERNAME}/cadastro-backend:latest
-
+          REPO=$(echo "ghcr.io/${{ secrets.DOCKERHUB_USERNAME }}/cadastro-backend:latest" | tr '[:upper:]' '[:lower:]')
+          docker tag cadastro-backend:latest ${REPO}
+          docker push ${REPO}
