@@ -47,5 +47,6 @@ jobs:
 
       - name: Build and push Docker image to Docker Hub
         run: |
-          docker build -f cadastro-backend/Dockerfile -t gabrielguilhermebcc/cadastro-backend:tagname cadastro-backend
-          docker push gabrielguilhermebcc/cadastro-backend:tagname
+          docker build -f cadastro-backend/Dockerfile -t ${{ secrets.DOCKERHUB_USERNAME }}/cadastro-backend:tagname cadastro-backend
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/cadastro-backend:tagname
+
