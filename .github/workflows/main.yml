@@ -45,8 +45,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Tag and push Docker image to GHCR
+      - name: Build and push Docker image to Docker Hub
         run: |
-          REPO=$(echo "ghcr.io/${{ secrets.DOCKERHUB_USERNAME }}/cadastro-backend:latest" | tr '[:upper:]' '[:lower:]')
-          docker tag cadastro-backend:latest ${REPO}
-          docker push ${REPO}
+          docker build -f cadastro-backend/Dockerfile -t gabrielguilhermebcc/cadastro-backend:tagname cadastro-backend
+          docker push gabrielguilhermebcc/cadastro-backend:tagname
