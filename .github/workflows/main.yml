@@ -47,5 +47,6 @@ jobs:
 
       - name: Tag and push Docker image
         run: |
-          docker tag cadastro-backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/cadastro-backend:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/cadastro-backend:latest
+          LOWER_USERNAME=$(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')
+          docker tag cadastro-backend:latest ${LOWER_USERNAME}/cadastro-backend:latest
+          docker push ${LOWER_USERNAME}/cadastro-backend:latest
