@@ -15,4 +15,9 @@ RUN apk add --no-cache bash
 WORKDIR /app
 # Copia o JAR gerado na etapa de build e renomeia para app.jar
 COPY --from=build /app/target/cadastro-backend-0.0.1-SNAPSHOT.jar app.jar
-# Não define ENTRYPOINT pois usaremos o wait-for-it via docker-compose
+# Copia o script wait-for-it.sh para a imagem
+COPY wait-for-it.sh /app/wait-for-it.sh
+# Torna o script executável
+RUN chmod +x /app/wait-for-it.sh
+# Define o ENTRYPOINT para aguardar o Postgres e iniciar a aplicação
+ENTRYPOINT ["/app/wait-for-it.sh", "postgres:5432", "--", "java", "-jar", "app.jar"]
