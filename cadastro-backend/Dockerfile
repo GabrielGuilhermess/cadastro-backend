@@ -21,3 +21,5 @@ COPY wait-for-it.sh /app/wait-for-it.sh
 RUN chmod +x /app/wait-for-it.sh
 # Define o ENTRYPOINT para aguardar o Postgres e iniciar a aplicação
 ENTRYPOINT ["/app/wait-for-it.sh", "postgres:5432", "--", "java", "-jar", "app.jar"]
+# Anula o CMD padrão da imagem base para evitar iniciar o jshell
+CMD []
