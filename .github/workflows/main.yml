@@ -37,7 +37,7 @@ jobs:
         run: mvn test
 
       - name: Build Docker image
-        working-directory: ${{ github.workspace }}
+        # Removendo o working-directory para que o comando seja executado na raiz do repositório
         run: docker build -t cadastro-backend:latest .
 
       - name: Log in to GitHub Container Registry
