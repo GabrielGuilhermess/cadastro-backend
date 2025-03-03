@@ -29,9 +29,11 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Build with Maven (skip tests)
+        working-directory: cadastro-backend
         run: mvn clean package -DskipTests
-
+      
       - name: Run tests with Maven
+        working-directory: cadastro-backend
         run: mvn test
 
       - name: Build Docker image
